@@ -5,6 +5,7 @@ from const import PANEL_SIZE
 from Trees import (combination_prob, composition_prob, partition_prob, prune_problem_tree)
 from Drawing import (imshow, imsave, drawing_panels, rendering_panels)
 from Num_Arrange import reverse_arrange
+import os
 
 
 # generate problems that pruned by given parameters
@@ -62,10 +63,14 @@ def generate_problem(problem_configs, num_of_problem, key, geom_type, geom_condi
 
         target = answer
         if seperate:
+            if not os.path.exists("ProbSet/{}".format(set_name)):
+                os.makedirs("ProbSet/{}".format(set_name))
             np.savez("ProbSet/{}/{}/prob_{}_{}_{}_{}_{}".format(key, set_name, n, geom_type, geom_condition, interpretation, analytical_part),
                      image=images, center=center_num, int_list_1=new_list_1, int_list_2=new_list_2, int_list_3=new_list_3, target=target,
                      prob_type=prob_type, math_operators=math_operators, geometrial_conditions=geometrial_conditions, mathematical_conditions=mathematical_conditions)
         else:
+            if not os.path.exists("ProbSet/{}".format(set_name)):
+                os.makedirs("ProbSet/{}".format(set_name))
             np.savez("ProbSet/{}/prob_{}_{}_{}_{}_{}_{}".format(set_name, n, key, geom_type, geom_condition, interpretation, analytical_part),
                      image=images, center=center_num, int_list_1=new_list_1, int_list_2=new_list_2, int_list_3=new_list_3, target=target,
                      prob_type=prob_type, math_operators=math_operators, geometrial_conditions=geometrial_conditions, mathematical_conditions=mathematical_conditions)
